@@ -1,5 +1,7 @@
 # Este programa es un juego de Trivia sobre programación en Python.
-# Integrantes: 
+# Integrantes:  Catalina Vargas
+#               Karina García Buendía
+#
 
 # Paso 4 Modulo random
 import random
