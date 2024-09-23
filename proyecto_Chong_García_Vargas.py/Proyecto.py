@@ -82,7 +82,8 @@ def juego_trivia():
         while errores <= 3:
             print(f'Fallaste tres veces. Final del juego.')
             break
-    
+     # Mostrar mensaje final
+    print('\n¡Gracias por jugar esta trivia sobre Python, bonito día!') 
     bienvenida()
     datos()
     instrucciones()
