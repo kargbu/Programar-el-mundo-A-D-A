@@ -80,15 +80,16 @@ def juego_trivia():
             print(f'Tu puntuación es de {score}')
 
     # 6.2 Contar y controlar los intentos fallidos
-        if errores != 3:
+        if errores <= 3:
             print(f'Puntuación final: {score}/{len(lista_preguntas)}')
 
 # Paso 7 Controlar errores consecutivos
-        while errores <= 3:
-            print(f'Fallaste tres veces. Final del juego.')
-            break
-# Mostrar mensaje final
-    print('\n¡Gracias por jugar esta trivia sobre Python, bonito día!')
+    while errores == 3:
+        print(f'Fallaste tres veces. Final del juego.')
+        # Mostrar mensaje final
+print('\n¡Gracias por jugar esta trivia sobre Python, bonito día!')
+        break
+
     bienvenida()
     datos()
     instrucciones()
