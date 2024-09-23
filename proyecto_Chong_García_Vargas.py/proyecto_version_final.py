@@ -71,24 +71,24 @@ def juego_trivia():
             respuesta_usuario = input(f'{preguntaX} (Responde verdadero o falso): ').lower()
 
 # Validar respuestas
-        if (respuesta_usuario == 'verdadero' and respuesta_correcta) or (respuesta_usuario == 'falso' and not respuesta_correcta):
-            print('Es correcto')
-            score += 1
-        else:
-            print('Es incorrecto')
-            errores += 1
-            print(f'Tu puntuación es de {score}')
+            if (respuesta_usuario == 'verdadero' and respuesta_correcta) or (respuesta_usuario == 'falso' and not respuesta_correcta):
+                print('Es correcto')
+                score += 1
+            else:
+                print('Es incorrecto')
+                errores += 1
+                print(f'Tu puntuación es de {score}')
 
     # 6.2 Contar y controlar los intentos fallidos
-        if errores <= 3:
-            print(f'Puntuación final: {score}/{len(lista_preguntas)}')
+            if errores <= 3:
+                print(f'Puntuación final: {score}/{len(lista_preguntas)}')
 
 # Paso 7 Controlar errores consecutivos
-    while errores == 3:
-        print(f'Fallaste tres veces. Final del juego.')
+        while errores == 3:
+            print(f'Fallaste tres veces. Final del juego.')
         # Mostrar mensaje final
-print('\n¡Gracias por jugar esta trivia sobre Python, bonito día!')
-        break
+            print('\n¡Gracias por jugar esta trivia sobre Python, bonito día!')
+            break
 
     bienvenida()
     datos()
