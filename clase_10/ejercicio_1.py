@@ -1,4 +1,8 @@
-# Definición de la clase
+# Crea una clase Estudiante con atributos como nombre, edad, y
+# notas. Implementa métodos para calcular el promedio de notas
+# y determinar si el estudiante ha aprobado o no. Agrega una
+# clase Curso que contenga una lista de estudiantes y un método
+# para mostrar todos los estudiantes aprobados.
 
 class Estudiante:
     def __init__(self,nombre, edad, notas):
@@ -19,9 +23,25 @@ def calcular_suma(notas):
 def calcula_prom(notas):
     suma = calcular_suma(notas)
     return suma / len(notas)
+class Curso:
+    def __init__(self):
+        self.aprobados = []
+        pass
+    def agregar_aprobado(self, nombre, promedio):
+            
+        if promedio >= 6:
+                self.aprobados.append(estudiante.nombre)
+
+    def mostrar_lista(self):
+            print(f'Los estudiantes que aprobaron son: {", ".join(self.aprobados)}')
+
+curso = Curso()
 
 for estudiante in lista_estudiantes:
-    suma_notas = calcular_suma(estudiante.notas)
+#   suma_notas = calcular_suma(estudiante.notas) Calcula la suma de las notas. NO sirve para el cálculo del promedio.
     promedios = calcula_prom(estudiante.notas)
 
     print(f'El promedio de {estudiante.nombre} es de {promedios}')
+
+curso.agregar_aprobado(estudiante.nombre, promedios)
+curso.mostrar_lista()
