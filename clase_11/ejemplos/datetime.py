@@ -19,3 +19,11 @@ mi_hora = datetime.time(14, 30, 0)
 
 print(f'Fecha específica: {mi_fecha}')
 print(f'Hora específica: {mi_hora}')
+
+# Cálculos con fechas: sumar 10 dias a la fecha actual
+
+diferencia = datetime.timedelta(days=10)
+
+nueva_fechaa = fecha_actual + diferencia
+
+print(f"Fecha despues de 10 dias: {nueva_fechaa}")
