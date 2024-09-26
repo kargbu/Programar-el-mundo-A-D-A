@@ -1,8 +1,8 @@
 # Definimos la clase de 
 class Gato:
     def __init__(self, color, nombre):
-        self.color = color
-        self.nombre = nombre
+        self.color = color   # Atributo color
+        self.nombre = nombre # Atributo nombre
         pass
 gato_1 = Gato('negro', 'Felix')
 gato_2 = Gato('gris', 'Ares')
