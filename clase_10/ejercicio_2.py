@@ -4,15 +4,15 @@
 # Usa polimorfismo para crear una lista de formas y calcular el área de cada figura.
 
 class Forma:
-    def __init__(self, lados = No)
+    def __init__(self, lados = No):
         pass
     self.lados = lados
     self.base = base
     self.radio = radio
 
     # Método para calcular el área
-    def area(self)
+    def area(self):
         pass
     
 class Triangulo(Forma):
-
+        pass
