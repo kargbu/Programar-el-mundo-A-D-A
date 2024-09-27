@@ -9,8 +9,17 @@ mostrara_in_val = enumerate(lista_cadena, 0)
 for indice, valor in mostrara_in_val:
    
     if valor == '':
-        print(f'{indice} encontró al vacío')
+        print(f'{indice}: encontró al vacío')
 
         continue
 
     print(f'{indice}: {valor}')
+
+# Ejemplo de uso de break
+    if indice == 5:
+        print('Se ha alcanzado el índice 5, se interrumpe el bucle.')
+        break
+
+# El bloque else se ejecuta si el bucle for no se interrumpe con un break
+else:
+    print('El bucle for ha terminado sin interrupciones.')
