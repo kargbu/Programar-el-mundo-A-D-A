@@ -17,9 +17,9 @@ class Ejemplo:
 
         self.__metodo_privado()
     # Llamando al método privado desde dentro de la clase
-    obj = Ejemplo('Puto')
+obj = Ejemplo('Puto')
     # print(obj.__atributo_privado)
     # Esto arrojará un Error
 
-    obj.metodo_publico()
+obj.metodo_publico()
     # Esto llamará al método privado internamente
