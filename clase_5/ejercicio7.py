@@ -1,10 +1,10 @@
-# Anidación compleja de diccionarios y listas
-# Crea un diccionario que contenga información sobre una plataforma de películas
-# Lista de diccionarios
-productos = [
+# Contar ocurrencias de un diccionario anidado
+# De la lista de películas
+
+catalogo_peliculas = [
     {
         'Número': 1,
-        'Nombre': 'Inception',
+        'Título': 'Inception',
         'Año': 2010,
         'Plataforma': 'HBO Max',
         'Artistas Principales': [
@@ -15,7 +15,7 @@ productos = [
     },
     {
         'Número': 2,
-        'Nombre': 'The Matrix',
+        'Título': 'The Matrix',
         'Año': 1999,
         'Plataforma': 'Netflix',
         'Artistas Principales': [
@@ -26,7 +26,7 @@ productos = [
     },
     {
         'Número': 3,
-        'Nombre': 'Interstellar',
+        'Título': 'Interstellar',
         'Año': 2014,
         'Plataforma': 'Amazon Prime Video',
         'Artistas Principales': [
@@ -37,7 +37,7 @@ productos = [
     },
     {
         'Número': 4,
-        'Nombre': 'The Godfather',
+        'Título': 'The Godfather',
         'Año': 1972,
         'Plataforma': 'Paramount+',
         'Artistas Principales': [
@@ -48,7 +48,7 @@ productos = [
     },
     {
         'Número': 5,
-        'Nombre': 'Pulp Fiction',
+        'Título': 'Pulp Fiction',
         'Año': 1994,
         'Plataforma': 'Hulu',
         'Artistas Principales': [
@@ -59,7 +59,7 @@ productos = [
     },
     {
         'Número': 6,
-        'Nombre': 'The Dark Knight',
+        'Título': 'The Dark Knight',
         'Año': 2008,
         'Plataforma': 'HBO Max',
         'Artistas Principales': [
@@ -70,12 +70,13 @@ productos = [
     }
 ]
 
-# Imprimir el nombre y el año de estreno del segundo producto en la lista
-# Imprimir los nombres de los artistas principales de la primera película
+contador_HBO_max = 0
 
-primera_pelicula = productos[0]
-
-print(f'Artistas principales de {primera_pelicula["Nombre"]}:')
-
-for artista in primera_pelicula['Artistas Principales']:
-    print(artista['Nombre'])
+for peli in catalogo_peliculas:
+    print(f'\nLos artistas de la película {peli["Título"]}\n')
+    for artista in peli['Artistas Principales']:
+        print(f'   - {artista["Nombre"]}')
+    print(f'\n Se encuentra en {peli["Plataforma"]}')
+    if peli["Plataforma"] == 'HBO Max':
+        contador_HBO_max += 1
+    print(f'Número de películas en HBO Max: {contador_HBO_max}')
