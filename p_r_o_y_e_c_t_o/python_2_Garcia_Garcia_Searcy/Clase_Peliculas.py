@@ -10,16 +10,17 @@ class Peli():
         self.__plataforma           = __plataforma
         self.__artistas_principales = __artistas_principales
 
-class CatalogoPelis():
-    def __init__(self, name_cata_pelis, ruta_archivo):
-    
-        def agregar_peli():
+        def acceder_titulo():
+            pass
+            
 
 
-            def enlistar_pelis():
 
-                def eliminar_peli():
-                    pass
+
+
+
+
+
 
 
 
