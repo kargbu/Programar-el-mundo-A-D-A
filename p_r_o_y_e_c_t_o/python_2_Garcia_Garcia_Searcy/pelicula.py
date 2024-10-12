@@ -1,7 +1,6 @@
 
-# Esta clase se encargará de representar una película con sus atributos, como el nombre.
-
-
+# pelicula.py
+#  Esta clase se encargará de representar una película con sus atributos, como el nombre.
 class Pelicula:
     tipo = 'Cine'                                               # Atributo de clase
     
@@ -44,25 +43,14 @@ class Pelicula:
             self.__anio = corregir_anio
         else:
             raise ValueError('El año de la película debe ser un número')
-    
 # Uso de la propiedad
-pelicula = Pelicula('Matriz', 1999, 'Ciencia Ficción', 'Lana Wachowski')
-print(pelicula.titulo)  # Llama al getter sin usar paréntesis
-pelicula.titulo = 'Matrix'  # Llama al setter como una asignación directa
-print(pelicula.titulo)  # Accede nuevamente al atributo usando getter}
+pelicula_1 = Pelicula('Matriz', 1999, 'Ciencia Ficción', 'Lana Wachowski')
+print(pelicula_1.titulo)  # Llama al getter sin usar paréntesis
+pelicula_1.titulo = 'Matrix'  # Llama al setter como una asignación directa
+print(pelicula_1.titulo)  # Accede nuevamente al atributo usando getter}
 
 pelicula_2 = Pelicula('Una familia normal', 2003, 'Drama', 'Per Hanefjord') 
 # La pelicula_2 tiene el año erroneo, debe ser 2023
 pelicula_2.mostrar_info() # Mostrar la información
 
 # ¿Cómo se accede al año de película para cambiar el año?
-
-
-
-
-
-
-
-
-
-        
