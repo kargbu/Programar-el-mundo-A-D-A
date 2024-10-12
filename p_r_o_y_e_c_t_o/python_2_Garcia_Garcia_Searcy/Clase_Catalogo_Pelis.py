@@ -11,7 +11,7 @@ class CatalogoPeliculas:
 
     def mostrar_menu_catalogo(self):
         print('1. Crear catálogo\n')
-        print('2. Abrir catálogo\n')
+        print('2. Lista de catálogos\n')
         print('3. Eliminar catálogo\n')
         print('4. Salir del menú\n')
 
@@ -36,6 +36,7 @@ class CatalogoPeliculas:
 
                 if elegir_opcion == 1:
                     print('Escogiste crear un catálogo\n')
+                   
 
                     try:
                         ruta_archivo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.txt')
@@ -45,13 +46,13 @@ class CatalogoPeliculas:
                                 titulo   = input('Título de la pélicula:\n ')
                                 director = input('Director de la película:\n ')
                                 anio     = input('Año de la película:\n ')
-                                genero   = input('Género de la película')
+                                genero   = input('Género de la película\n')
 
                                 peliculas = Pelicula(titulo, anio, genero, director)
                                 self.peliculas.append(peliculas)
                                 nuevo.write(str(peliculas + '\n'))
 
-                                continuar = input('¿Deseas añadir otra película? (S/N):\n ')
+                                continuar = input('¿Deseas añadir otra catálogo? (S/N):\n ')
 
                                 if continuar.lower() != 's':
                                     break
@@ -62,7 +63,7 @@ class CatalogoPeliculas:
                 elif elegir_opcion == 2:
                     print('Escogiste abrir un catálogo\n')
 # Abrir el catálogo que se encuentra en 
-                    lista_txt = self.mostrar_archivos_txt()
+                    self.mostrar_archivos_txt()
 
                 elif elegir_opcion == 3:
                     print('Escogiste eliminar un catálogo\n')
@@ -72,7 +73,8 @@ class CatalogoPeliculas:
                 elif elegir_opcion == 4:
                     print('Saliendo del menú...')
                     break
-    
+
+
     def mostrar_archivos_txt(self):
 # Mostrar todos los archivos .txt en el directorio especificado
         try:
