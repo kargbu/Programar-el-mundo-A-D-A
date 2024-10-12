@@ -78,7 +78,7 @@ class CatalogoPeliculas:
         try:
             archivos_catalogos = os.listdir(self.ruta_directorio)
             archivos_catalogos_txt = [archivo for archivo in archivos_catalogos
-                                       if archivos_catalogos.endswith('.txt')]
+                                       if archivo.endswith('.txt')]
             if archivos_catalogos_txt:
                 print(f'Los catálogos son:\n ')
                 for archivo in archivos_catalogos_txt:
@@ -87,7 +87,8 @@ class CatalogoPeliculas:
                 print('No se encontró ningún catálogo en el directorio.')
         except Exception as e:
             print(f'Error en la lista de catálogos en el directorio {e}')
-    
+
+
     def eliminar_catalogo(self):
         try:
             archivo_catalogos = os.listdir(self.ruta_directorio)
@@ -95,17 +96,19 @@ class CatalogoPeliculas:
                                       if archivo.endswith('.txt')]
             if archivos_catalogos_txt:
                 print(f'Los archivos son:\n ')
-                for i, archivo in enumerate (archivos_catalogos_txt,1)
-                    print(f'{i}.{archivo}')
+
+                for i, archivo in enumerate(archivos_catalogos_txt, 1):
+                    print(f'{i}. {archivo}')
                 elegir_archivo = input('Ingresa el número del archivo que deseas eliminar: ')
-                if elegir_archivo.isdigit() and 1 <=
-                int(elegir_archivo) <= len(archivos_catalogos_txt):
-                archivo_a_eliminar = archivos_catalogos_txt[int(elegir_archivo) - 1]
-                ruta_archivo = os.path.join(self.ruta_directorio, archivo_a_eliminar)
-                os.remove(ruta_archivo)
+
+                if elegir_archivo.isdigit() and 1 <= int(elegir_archivo) <= len(archivos_catalogos_txt):
+                    archivo_a_eliminar = archivos_catalogos_txt[int(elegir_archivo) - 1]
+                    ruta_archivo = os.path.join(self.ruta_directorio, archivo_a_eliminar)
+                    os.remove(ruta_archivo)
                 print(f'El archivo {archivo_a_eliminar} fue eliminado.')
             else:
                 print('No hay catalogos en el directorio.')
+
         except Exception as e:
             print(f'Error al eliminar el catálogo en el directorio')
 
