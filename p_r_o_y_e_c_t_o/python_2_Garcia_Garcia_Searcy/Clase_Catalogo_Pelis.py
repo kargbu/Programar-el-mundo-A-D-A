@@ -4,12 +4,12 @@
 import os
 from pelicula import Pelicula
 class CatalogoPeliculas:
-    def __init__(self, nombre_catalogo, ruta_catalogo):
+    def __init__(self, nombre_catalogo, ruta_directorio):
         self.nombre_catalogo = nombre_catalogo
-        self.ruta_catalogo = ruta_catalogo
+        self.ruta_directorio = ruta_directorio
         self.peliculas = []
 
-    def mostrar_menu_catalogo(self, nombre_catalogo, ruta_catalogo):
+    def mostrar_menu_catalogo(self):
         print('1. Crear catálogo\n')
         print('2. Abrir catálogo\n')
         print('3. Eliminar catálogo\n')
@@ -25,7 +25,7 @@ class CatalogoPeliculas:
      
  # Se elige una opción       
         while True:
-            elegir_opcion = self.mostrar_menu_catalogo(nombre_catalogo, ruta_catalogo)
+            elegir_opcion = self.mostrar_menu_catalogo()
 
 # Verificar que el usuario ingresó una opción válida. El método elegir_opcion.isdigit() verifica que la cadena que ingresa el usuario sean dígitos
 
@@ -35,10 +35,11 @@ class CatalogoPeliculas:
                 elegir_opcion = int(elegir_opcion)
 
                 if elegir_opcion == 1:
-                    print('Escogiste crear un catálogo')
+                    print('Escogiste crear un catálogo\n')
 
                     try:
-                        with open(self.ruta_catalogo, 'w') as nuevo:
+                        ruta_archivo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.txt')
+                        with open(ruta_archivo, 'w') as nuevo:
 
                             while True:
                                 titulo   = input('Título de la pélicula:\n ')
@@ -47,7 +48,7 @@ class CatalogoPeliculas:
                                 genero   = input('Género de la película')
 
                                 peliculas = Pelicula(titulo, anio, genero, director)
-                                self.peliculas.append(pelicula)
+                                self.peliculas.append(peliculas)
                                 nuevo.write(str(peliculas + '\n'))
 
                                 continuar = input('¿Deseas añadir otra película? (S/N):\n ')
@@ -59,12 +60,12 @@ class CatalogoPeliculas:
                         print(f'Error al crear {e}')
 
                 elif elegir_opcion == 2:
-                    print('Escogiste abrir un catálogo')
+                    print('Escogiste abrir un catálogo\n')
 # Abrir el catálogo que se encuentra en 
-                    self.mostrar_archivos_txt(self.nombre_catalogo, self.ruta_catalogo)
+                    lista_txt = self.mostrar_archivos_txt()
 
                 elif elegir_opcion == 3:
-                    print('Escogiste eliminar un catálogo')
+                    print('Escogiste eliminar un catálogo\n')
                     mensaje = self.eliminar_catalogo()
                     print(mensaje)
 
@@ -72,43 +73,45 @@ class CatalogoPeliculas:
                     print('Saliendo del menú...')
                     break
     
-    def mostrar_archivos_txt(self,nombre_catalogo, ruta_catalogo):
-# Mostrar que el/los archivos existen
-        if os.path.exists(self.ruta_catalogo):
-            try:
-                with open(self.ruta_catalogo, 'r') as archivo:
-                     contenido = archivo.read()
-                     print(f'El contenido {self.ruta_catalogo}:\n{contenido}')
-                
-            except FileNotFoundError:
-                print(f'No se encontró {self.ruta_catalogo}')
-        else:
-             print(f'El archivo {self.ruta_catalogo} no existe.')
-
+    def mostrar_archivos_txt(self):
 # Mostrar todos los archivos .txt en el directorio especificado
         try:
-            archivos_catalogos = os.listdir(self.ruta_catalogo)
+            archivos_catalogos = os.listdir(self.ruta_directorio)
             archivos_catalogos_txt = [archivo for archivo in archivos_catalogos
                                        if archivos_catalogos.endswith('.txt')]
             if archivos_catalogos_txt:
-                print(f'Los catálogos son:\n {self.ruta_catalogo}')
+                print(f'Los catálogos son:\n ')
                 for archivo in archivos_catalogos_txt:
                     print(archivo)
             else:
                 print('No se encontró ningún catálogo en el directorio.')
         except Exception as e:
-            print(f'Error en la lista de catálogos: {e}')
+            print(f'Error en la lista de catálogos en el directorio {e}')
     
     def eliminar_catalogo(self):
-        if os.path.exists(self.ruta_catalogo):
-            os.remove(self.ruta_catalogo)
-            return 'El catálogo fue eliminado con éxito.'
-        else:
-            return 'No se encontró el archivo del catálogo.'
+        try:
+            archivo_catalogos = os.listdir(self.ruta_directorio)
+            archivos_catalogos_txt = [archivo for archivo in archivo_catalogos
+                                      if archivo.endswith('.txt')]
+            if archivos_catalogos_txt:
+                print(f'Los archivos son:\n ')
+                for i, archivo in enumerate (archivos_catalogos_txt,1)
+                    print(f'{i}.{archivo}')
+                elegir_archivo = input('Ingresa el número del archivo que deseas eliminar: ')
+                if elegir_archivo.isdigit() and 1 <=
+                int(elegir_archivo) <= len(archivos_catalogos_txt):
+                archivo_a_eliminar = archivos_catalogos_txt[int(elegir_archivo) - 1]
+                ruta_archivo = os.path.join(self.ruta_directorio, archivo_a_eliminar)
+                os.remove(ruta_archivo)
+                print(f'El archivo {archivo_a_eliminar} fue eliminado.')
+            else:
+                print('No hay catalogos en el directorio.')
+        except Exception as e:
+            print(f'Error al eliminar el catálogo en el directorio')
 
 # Crear una instancia y ejecutar el menú
-nombre_catalogo = 'catalogo_pelis_1'
-ruta_catalogo = '/Users/kgb/Desktop/ADA_TRABAJOS/ADA_TRABAJOS/p_r_o_y_e_c_t_o/python_2_Garcia_Garcia_Searcy/'
+nombre_catalogo = 'catalogo_pelis_2'
+ruta_directorio = '/Users/kgb/Desktop/ADA_TRABAJOS/ADA_TRABAJOS/p_r_o_y_e_c_t_o/python_2_Garcia_Garcia_Searcy/'
         
-catalogo = CatalogoPeliculas(nombre_catalogo, ruta_catalogo)
+catalogo = CatalogoPeliculas(nombre_catalogo, ruta_directorio)
 catalogo.ejecutar_menu_catalogo()
