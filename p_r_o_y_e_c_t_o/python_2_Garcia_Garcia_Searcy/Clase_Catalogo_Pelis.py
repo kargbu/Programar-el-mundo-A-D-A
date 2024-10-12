@@ -4,10 +4,21 @@
 import os
 from pelicula import Pelicula
 class CatalogoPeliculas:
-    def __init__(self, nombre_catalogo, ruta_directorio):
-        self.nombre_catalogo = nombre_catalogo
+    def __init__(self, ruta_directorio):
+        self.nombre_catalogo = ''
         self.ruta_directorio = ruta_directorio
         self.peliculas = []
+
+
+    def solicitar_nombre_catalogo(self):
+        self.nombre_catalogo = input('Escribe el nombre del catálogo: ')    
+        ruta_catalogo = os.path.join(self.ruta_directorio, self.nombre_catalogo)
+
+        if os.path.exist(ruta_catalogo):
+            print('El catálogo ya existe.\n')
+        else:
+            print('Creando nuevo catálogo.\n')
+
 
     def mostrar_menu_catalogo(self):
         print('1. Crear catálogo\n')
@@ -16,11 +27,9 @@ class CatalogoPeliculas:
         print('4. Salir del menú\n')
 
         elegir_opcion =input('Ingresa un número de las opciones: ')
-
         return elegir_opcion
     
 # Ejecutar el menú de los catálogos
-    
     def ejecutar_menu_catalogo(self):
      
  # Se elige una opción       
@@ -28,7 +37,6 @@ class CatalogoPeliculas:
             elegir_opcion = self.mostrar_menu_catalogo()
 
 # Verificar que el usuario ingresó una opción válida. El método elegir_opcion.isdigit() verifica que la cadena que ingresa el usuario sean dígitos
-
             if not elegir_opcion.isdigit() or int(elegir_opcion) not in range (1,5):
                 print('Opción inválida, intenta de nuevo.')
             else:
@@ -36,30 +44,9 @@ class CatalogoPeliculas:
 
                 if elegir_opcion == 1:
                     print('Escogiste crear un catálogo\n')
+                    self.solicitar_nombre_catalogo()
+                    self.crear_catalogo()
                    
-
-                    try:
-                        ruta_archivo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.txt')
-                        with open(ruta_archivo, 'w') as nuevo:
-
-                            while True:
-                                titulo   = input('Título de la pélicula:\n ')
-                                director = input('Director de la película:\n ')
-                                anio     = input('Año de la película:\n ')
-                                genero   = input('Género de la película\n')
-
-                                peliculas = Pelicula(titulo, anio, genero, director)
-                                self.peliculas.append(peliculas)
-                                nuevo.write(str(peliculas + '\n'))
-
-                                continuar = input('¿Deseas añadir otra catálogo? (S/N):\n ')
-
-                                if continuar.lower() != 's':
-                                    break
-                                print('Catálogo creado con éxito')
-                    except Exception as e:
-                        print(f'Error al crear {e}')
-
                 elif elegir_opcion == 2:
                     print('Escogiste abrir un catálogo\n')
 # Abrir el catálogo que se encuentra en 
@@ -73,7 +60,29 @@ class CatalogoPeliculas:
                 elif elegir_opcion == 4:
                     print('Saliendo del menú...')
                     break
+   
+   
+    def crear_catalogo(self):
+        try:
+            ruta_archivo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.txt')
+            with opon(ruta_archivo, 'a') as nuevo:
+                   while True:
+                                titulo   = input('Título de la pélicula:\n ')
+                                director = input('Director de la película:\n ')
+                                anio     = input('Año de la película:\n ')
+                                genero   = input('Género de la película\n')
 
+                                peliculas = Pelicula(titulo, anio, genero, director)
+                                self.peliculas.append(peliculas)
+                                nuevo.write(str(peliculas + '\n'))
+
+                                continuar = input('¿Deseas añadir otra película? (S/N):\n ')
+
+                                if continuar.lower() != 's':
+                                    break
+                                print('Catálogo creado con éxito')
+        except Exception as e:
+            print(f'Error al crear {e}')
 
     def mostrar_archivos_txt(self):
 # Mostrar todos los archivos .txt en el directorio especificado
