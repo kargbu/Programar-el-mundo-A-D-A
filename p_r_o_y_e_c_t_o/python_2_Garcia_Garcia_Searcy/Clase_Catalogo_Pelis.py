@@ -2,40 +2,58 @@
 # 2. Si el catálogo ya existe, este se modificará.
 # 3. Cuando el catálogo esté configurado, entonces el programa mostrará un menú de opciones.
 import os
-import a_p
-import m_p
-import c_no_e
 
 class CatalogoPeliculas:
     def __init__(self, nombre_catalogo, ruta_catalogo):
         self.nombre_catalogo = nombre_catalogo
         self.ruta_catalogo = ruta_catalogo
 
-    def mostrar_menu(self):
-        print("Hola, ¡bienvenido a Pelimovie!")
-        print("Escoge qué deseas hacer (escribe el número)")
-        print("1.- Agregar película")
-        print("2.- Listar películas")
-        print("3.- Eliminar catálogo de películas")
-        print("4.- Salir")
-        choose = input("Dame un número entre 1 y 4: ")
-        return choose
-    
-    def agregar_pelicula(self, titulo, director=None, genero=None, año=None):
-        return a_p.agregar_pelicula(self.ruta_catalogo, titulo, director, genero, año)
-    
-    def listar_peliculas(self):
-        return m_p.listar_peliculas(self.ruta_catalogo)
+    def mostrar_menu_catalogo(self, nombre_catalogo, ruta_catlogo):
+        print('1. Crear catálogo\n')
+        print('2. Abrir catálogo\n')
+        print('3. Eliminar catálogo\n')
+        print('4. Salir de menú')
+        elegir_opcion =input('Ingresa un número de las opciones:\n ')
 
-    def buscar_pelicula(self, titulo):
-        return m_p.buscar_pelicula(self.ruta_catalogo, titulo)
+        return elegir_opcion
+    
+# Ejecutar el menú de los catálogos
+    
+    def ejecutar_menu_catalogo(self):
+        while True:
+            elegir_opcion = self.mostrar_menu_catalogo()
 
-    def eliminar_pelicula(self, titulo):
-        return m_p.eliminar_pelicula(self.ruta_catalogo, titulo)
-    
-    def no_existe_catalogo(self, Nombre_Peli):
-        return c_no_e.no_existe_catalogo(self.ruta_catalogo, Nombre_Peli)
-    
+# Verificar que el usuario ingresó una opción válida. El método elegir_opcion.isdigit() verifica que la cadena que ingresa el usuario sean dígitos
+
+            if not elegir_opcion.isdigit() or int(elegir_opcion) not in range (1,5):
+                print('Opción inválida, intenta de nuevo.')
+            else:
+                elegir_opcion = int(elegir_opcion)
+
+                if elegir_opcion == 1:
+                    print('Escogiste crear un catálogo')
+
+                    try:
+                        with open(self.ruta_catalogo, 'w') as nuevo:
+                            contenido = input('Escribe el contenido del nuevo catálogo')
+                                               # Tengo que mandar llamar a la clase Película ¿cómo le hago?
+                            nuevo.write(contenido)
+                            print('Catálogo creado con éxito')
+                    except excepcion as e:
+                        print(f'Error al crear {e}')
+
+                elif elegir_opcion == 2:
+                    print('Escogiste abrir un catálogo')
+
+                elif elegir_opcion == 3:
+                    print('Escogiste eliminar un catálogo')
+                    mensaje = self.eliminar_catalogo()
+                    print(mensaje)
+
+                elif elegir_opcion == 4:
+                    print('Saliendo del menú...')
+                    break
+
     def eliminar_catalogo(self):
         if os.path.exists(self.ruta_catalogo):
             os.remove(self.ruta_catalogo)
@@ -43,44 +61,6 @@ class CatalogoPeliculas:
         else:
             return 'No se encontró el archivo del catálogo.'
 
-    def ejecutar(self):
-        while True:
-            choose = self.mostrar_menu()
-            if not choose.isdigit() or int(choose) not in range(1, 5):
-                print("Opción inválida, intenta de nuevo.")
-            else:
-                choose = int(choose)
-                if choose == 1:
-                    print("Escogiste la opción 1")
-                    try:
-                        with open(self.ruta_catalogo) as f:
-                            print("El archivo existe")
-                            titulo = input("Ingrese el título de la película: ")
-                            director = input("Ingrese el director de la película (opcional): ")
-                            genero = input("Ingrese el género de la película (opcional): ")
-                            año = input("Ingrese el año de la película (opcional): ")
-                            print(self.agregar_pelicula(titulo, director, genero, año))
-                    except FileNotFoundError:
-                        print("El archivo aún no existe")
-                        print(self.no_existe_catalogo("Nueva Película"))
-                
-                elif choose == 2:
-                    try:
-                        with open(self.ruta_catalogo) as f:
-                            print("Mostrar películas existentes en el catálogo")
-                            print(self.listar_peliculas())
-                    except FileNotFoundError:
-                        print("El archivo no existe. Por favor, primero registra una película.")
-                        
-                elif choose == 3:
-                    print("Elimina el catálogo.")
-                    print(self.eliminar_catalogo())
-                    
-                elif choose == 4:
-                    print("¡Muchas gracias por visitarnos! ¡Adiós!")
-                    break
-
-# Ejecutar la función principal
-if __name__ == "__main__":
-    catalogo = CatalogoPeliculas("Mi Catálogo", "Catalogo.txt")
-    catalogo.ejecutar()
+# Crear una instancia y ejecutar el menú
+catalogo = CatalogoPeliculas('Mi Catalogo', 'ruta_del_catalogo.txt')
+catalogo.ejecutar_menu_catalogo()

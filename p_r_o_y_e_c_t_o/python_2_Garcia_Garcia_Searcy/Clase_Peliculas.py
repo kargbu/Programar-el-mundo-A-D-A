@@ -1,6 +1,7 @@
 
 # Esta clase se encargará de representar una película con sus atributos, como el nombre.
 
+
 class Pelicula:
     tipo = 'Cine'                                               # Atributo de clase
     

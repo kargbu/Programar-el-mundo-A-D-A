@@ -10,8 +10,8 @@ with open ("Catalogo.txt", 'w') as archivo:
    otra = input()
 
    if otra.lower()in ["si"]:
-      import AgregarPeli
-      from AgregarPeli import *
+      import a_p
+      from a_p import *
    else: 
       otra.lower() in ["no"]
       print("Ok, gracias, adiosito!")
