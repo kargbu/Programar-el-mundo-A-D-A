@@ -1,6 +1,8 @@
 
 # pelicula.py
 #  Esta clase se encargará de representar una película con sus atributos, como el nombre.
+
+
 class Pelicula:
     tipo = 'Cine'                                               # Atributo de clase
     
@@ -13,47 +15,7 @@ class Pelicula:
     def __str__(self):
         return f'("{self.titulo}", "{self.anio}", "{self.genero}", "{self.director}")'
 
-# Método para mostrar información
-    def mostrar_info(self):
-        print(f'Nombre de la película es {self.__titulo} y el género es {self.genero}.')
-        print(f'El director de {self.__titulo} es {self.director} y se estrenó en el año {self.__anio}\n')  # Imprime la información
-
-# Menú peliculas
-    def mostrar_menu_peliculas(self):
-        print(' 1. Lista de películas\n')
-        print(' 2. Agregar películas\n')
-        print(' 3. Buscar película')
-        print(' 4. Salir del menú')
-        elegir_opcion = input('Ingresa el número de las opciones: ')
-        return elegir_opcion
-
-    def ejecutar_menu_peliculas(self):
-        while True:
-            elegir_opcion = self.mostrar_menu_peliculas()
-            if not elegir_opcion.isdigit() or int(elegir_opcion) not in range(1,5):
-                print('Opción inválida, intenta de nuevamente.')
-            else:
-                elegir_opcion = int(elegir_opcion)
-                if elegir_opcion == 1:
-                    print('La siguiente es la lista de películas:\n')
-                    self.listar_peliculas()
-
-                elif elegir_opcion == 2:
-                    print('Agrega una película\n')
-                    self.crear_catalogo()
-                elif elegir_opcion == 3:
-                    print('Buscar película\n')
-                    self.buscar_pelicula()
-                elif elegir_opcion ==4:
-                    print('Saliendo del menú de películas...')
-                    break
-
-    def buscar_pelicula(self):
-        ruta_archivo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.txt')
-        
-
-
-
+    @property
     def titulo(self):
         return self.__titulo
 # El decorador @property convierte el método titulo en un getter,

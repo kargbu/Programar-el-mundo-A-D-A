@@ -69,20 +69,33 @@ class CatalogoPeliculas:
         except Exception as e:
             print(f'Error al crear el catálogo: {e}')
 
+
     def mostrar_archivos_txt(self):
         try:
             archivos_catalogos = os.listdir(self.ruta_directorio)
             archivos_catalogos_txt = [archivo for archivo in archivos_catalogos if archivo.endswith('.txt')]
             if archivos_catalogos_txt:
                 print('Los catálogos son:\n ')
-                for archivo in archivos_catalogos_txt:
-                    print(archivo)
+                for i, archivo in enumerate(archivos_catalogos_txt,1):
+                    print(f'{i}. {archivo}'
             else:
                 print('No se encontró ningún catálogo en el directorio.')
         except Exception as e:
             print(f'Error al listar los catálogos: {e}')
+    
+    def elegir_catalogo(self):
+        archivos_catalogos = os.listdir(self.ruta_directorio)
+        archivos_catalogos_txt = [archivo for archivo in archivos_catalogos if archivo.endswith('.txt')]
+        elegir_archivo = input('Ingresa el número del catálogo que deseas abrir: ')
+        if elegir_archivo.isdigit() and 1 <= int(elegir_archivo) <= len(archivos_catalogos_txt):
+            self.nombre_catalogo = archivos_catalogos_txt[int(elegir_archivo) - 1].replace('.txt', '')
+            print(f'Seleccionaste el catálogo: {self.nombre_catalogo}\n')
+        else:
+            print('Número de catálogo inválido.')
 
 
+    def listar_peliculas(self)
+                        
     def eliminar_catalogo(self):
         try:
             archivos_catalogos = os.listdir(self.ruta_directorio)
@@ -101,6 +114,63 @@ class CatalogoPeliculas:
                 print('No hay catálogos en el directorio.')
         except Exception as e:
             print(f'Error al eliminar el catálogo en el directorio: {e}')
+
+# Método para mostrar información
+    def mostrar_info(self):
+        print(f'Nombre de la película es {self.__titulo} y el género es {self.genero}.')
+        print(f'El director de {self.__titulo} es {self.director} y se estrenó en el año {self.__anio}\n')  # Imprime la información
+
+# Menú peliculas
+    def mostrar_menu_peliculas(self):
+        print(' 1. Lista de películas\n')
+        print(' 2. Agregar películas\n')
+        print(' 3. Buscar película')
+        print(' 4. Salir del menú')
+        elegir_opcion = input('Ingresa el número de las opciones: ')
+        return elegir_opcion
+
+
+    def ejecutar_menu_peliculas(self):
+        while True:
+            elegir_opcion = self.mostrar_menu_peliculas()
+            if not elegir_opcion.isdigit() or int(elegir_opcion) not in range(1,5):
+                print('Opción inválida, intenta de nuevamente.')
+            else:
+                elegir_opcion = int(elegir_opcion)
+                if elegir_opcion == 1:
+                    print('La siguiente es la lista de películas:\n')
+                    self.listar_peliculas()
+
+                elif elegir_opcion == 2:
+                    print('Agrega una película\n')
+                    self.crear_catalogo()
+
+                elif elegir_opcion == 3:
+                    print('Buscar película\n')
+                    self.buscar_pelicula()
+
+                elif elegir_opcion ==4:
+                    print('Saliendo del menú de películas...')
+                    break
+
+    def buscar_pelicula(self):
+        ruta_archivo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.txt')
+        titulo_a_buscar = input('Ingresa el título de la película que deseas buscar: ')
+        try:
+            with open(ruta_archivo, 'r') as archivo:
+                peliculas = archivo.readlines()
+                encontrado = False
+                for pelicula in peliculas:
+                    if titulo_a_buscar.lower() in pelicula.lower():
+                        print(pelicula)
+                        encontrado = True
+                if not encontrado:
+                    print('Película no encontrada.')
+        except Exception as e:
+            print(f'Error al buscar la película: {e}')               
+
+
+
 
 # Crear una instancia y ejecutar el menú
 ruta_directorio = '/Users/kgb/Desktop/ADA_TRABAJOS/ADA_TRABAJOS/p_r_o_y_e_c_t_o/python_2_Garcia_Garcia_Searcy/'

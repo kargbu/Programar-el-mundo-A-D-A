@@ -1,0 +1,2 @@
+("La insensata", "2025", "Drama", "Franciso Marmolejo Rivas")
+("El insensato", "2026", "Comedia", "Karina García Buendía")
