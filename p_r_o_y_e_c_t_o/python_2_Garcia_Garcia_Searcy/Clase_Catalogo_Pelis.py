@@ -9,11 +9,11 @@ class CatalogoPeliculas:
 
     def solicitar_nombre_catalogo(self):
         self.nombre_catalogo = input('Escribe el nombre del catálogo: ')
-        ruta_catalogo = os.path.join(self.ruta_directorio, self.nombre_catalogo)
+        ruta_catalogo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.1txt')
         if os.path.exists(ruta_catalogo):  
             print('El catálogo ya existe.\n')
         else:
-            print('Se creo el catálogo {self.nombre_catalogo}.\n')
+            print(f'Se creo el catálogo {self.nombre_catalogo}.\n')
 
     def mostrar_menu_catalogo(self):
         print('1. Crear catálogo\n')
@@ -49,8 +49,12 @@ class CatalogoPeliculas:
     def crear_catalogo(self):
         try:
             ruta_archivo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.txt')
-            with open(ruta_archivo, 'a') as nuevo:  # Corregido: 'opon' a 'open'
+            with open(ruta_archivo, 'a') as nuevo:
+                
                 while True:
+                    preguntar = input('¿Quieres registrar una película en el nuevo catálogo? (S/N) ')
+                    if preguntar.lower() != 's':
+                        break
                     titulo = input('Título de la pélicula:\n ')
                     director = input('Director de la película:\n ')
                     anio = input('Año de la película:\n ')
@@ -78,12 +82,13 @@ class CatalogoPeliculas:
         except Exception as e:
             print(f'Error al listar los catálogos: {e}')
 
+
     def eliminar_catalogo(self):
         try:
             archivos_catalogos = os.listdir(self.ruta_directorio)
             archivos_catalogos_txt = [archivo for archivo in archivos_catalogos if archivo.endswith('.txt')]
             if archivos_catalogos_txt:
-                print('Los archivos son:\n ')
+                print('Los catalogós que puedes eliminar son:\n ')
                 for i, archivo in enumerate(archivos_catalogos_txt, 1):
                     print(f'{i}. {archivo}')
                 elegir_archivo = input('Ingresa el número del archivo que deseas eliminar: ')
