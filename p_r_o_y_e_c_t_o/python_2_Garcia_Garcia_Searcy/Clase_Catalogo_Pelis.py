@@ -9,7 +9,7 @@ class CatalogoPeliculas:
 
     def solicitar_nombre_catalogo(self):
         self.nombre_catalogo = input('Escribe el nombre del catálogo: ')
-        ruta_catalogo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.1txt')
+        ruta_catalogo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.txt')
         if os.path.exists(ruta_catalogo):  
             print('El catálogo ya existe.\n')
         else:
@@ -54,11 +54,10 @@ class CatalogoPeliculas:
 # Menú peliculas
     def mostrar_menu_peliculas(self):
         elegir_opcion_pelicula = None
-        print(elegir_opcion_pelicula)
         print(' 1. Lista de películas\n')
         print(' 2. Agregar películas\n')
-        print(' 3. Buscar película')
-        print(' 4. Salir del menú')
+        print(' 3. Buscar película\n')
+        print(' 4. Salir del menú\n')
         elegir_opcion_pelicula = input('Ingresa el número de la opción que quieres ejecutar: ')
         return elegir_opcion_pelicula
 
@@ -76,7 +75,7 @@ class CatalogoPeliculas:
 
                 elif elegir_opcion_pelicula == 2:
                     print('Agrega una película\n')
-                    self.crear_catalogo()
+                    self.agregar_pelicula()
                     self.mostrar_info_pelicula()
 
                 elif elegir_opcion_pelicula == 3:
@@ -87,6 +86,20 @@ class CatalogoPeliculas:
                     print('Saliendo del menú de películas...')
                     break
 
+    def agregar_pelicula(self):
+        try:
+            ruta_archivo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.txt')
+            with open(ruta_archivo, 'a') as archivo:
+                titulo = input('Título de la película:\n ')
+                director = input('Director de la película:\n ')
+                anio = input('Año de la película:\n ')
+                genero = input('Género de la película:\n ')
+                pelicula = Pelicula(titulo, anio, genero, director)
+                self.peliculas.append(pelicula)
+                archivo.write(f'{titulo}, {anio}, {genero}, {director}\n')
+                print('Película agregada con éxito.')
+        except Exception as e:
+            print(f'Error al agregar la película: {e}')
 
     def crear_catalogo(self):
         try:
@@ -103,7 +116,7 @@ class CatalogoPeliculas:
                     genero = input('Género de la película:\n')
                     pelicula = Pelicula(titulo, anio, genero, director)
                     self.peliculas.append(pelicula)
-                    nuevo.write(str(pelicula) + '\n')
+                    nuevo.write(str(titulo), {anio}, {genero}, {director} + '\n')
                     continuar = input('¿Deseas añadir otra película? (S/N):\n ')
                     if continuar.lower() != 's':
                         break
@@ -184,10 +197,7 @@ class CatalogoPeliculas:
                 if not encontrado:
                     print('Película no encontrada.')
         except Exception as e:
-            print(f'Error al buscar la película: {e}')               
-
-
-
+            print(f'Error al buscar la película: {e}')              
 
 # Crear una instancia y ejecutar el menú
 ruta_directorio = '/Users/kgb/Desktop/ADA_TRABAJOS/ADA_TRABAJOS/p_r_o_y_e_c_t_o/python_2_Garcia_Garcia_Searcy/'
