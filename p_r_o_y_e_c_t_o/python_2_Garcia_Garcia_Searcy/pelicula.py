@@ -49,7 +49,8 @@ class Pelicula:
                     break
 
     def buscar_pelicula(self):
-        ruta_archivo = os.path.join(self.ruta_directorio, self.nombre_catalogo)
+        ruta_archivo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.txt')
+        
 
 
 
