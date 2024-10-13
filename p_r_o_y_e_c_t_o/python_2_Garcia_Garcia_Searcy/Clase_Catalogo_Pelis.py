@@ -24,6 +24,7 @@ class CatalogoPeliculas:
         return elegir_opcion
 
     def ejecutar_menu_catalogo(self):
+
         while True:
             elegir_opcion = self.mostrar_menu_catalogo()
             if not elegir_opcion.isdigit() or int(elegir_opcion) not in range(1, 5):
@@ -34,14 +35,18 @@ class CatalogoPeliculas:
                     print('Escogiste crear un catálogo\n')
                     self.solicitar_nombre_catalogo()
                     self.crear_catalogo()
-                    self.mostrar_archivos_txt()
+                    
                 elif elegir_opcion == 2:
                     print('Escogiste abrir un catálogo\n')
                     self.mostrar_archivos_txt()
+                    self.elegir_catalogo()
+                    self.ejecutar_menu_peliculas()
+
                 elif elegir_opcion == 3:
                     print('Escogiste eliminar un catálogo\n')
                     mensaje = self.eliminar_catalogo()
                     print(mensaje)
+
                 elif elegir_opcion == 4:
                     print('Saliendo del menú...')
                     break
@@ -76,8 +81,8 @@ class CatalogoPeliculas:
             archivos_catalogos_txt = [archivo for archivo in archivos_catalogos if archivo.endswith('.txt')]
             if archivos_catalogos_txt:
                 print('Los catálogos son:\n ')
-                for i, archivo in enumerate(archivos_catalogos_txt,1):
-                    print(f'{i}. {archivo}'
+                for i, archivo in enumerate(archivos_catalogos_txt, 1):
+                    print(f'{i}. {archivo}')
             else:
                 print('No se encontró ningún catálogo en el directorio.')
         except Exception as e:
@@ -93,8 +98,16 @@ class CatalogoPeliculas:
         else:
             print('Número de catálogo inválido.')
 
-
-    def listar_peliculas(self)
+    def listar_peliculas(self):
+        ruta_archivo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.txt')
+        try:
+            while True:
+                with open(ruta_archivo, 'r') as archivo:
+                    print('Las películas en el catálogo son:\n ')
+                    print(archivo.read())
+        except Exception as e:
+            print(f'Error al listar las películas del catálogo.')
+            
                         
     def eliminar_catalogo(self):
         try:
@@ -122,11 +135,12 @@ class CatalogoPeliculas:
 
 # Menú peliculas
     def mostrar_menu_peliculas(self):
+        print(elegir_opcion)
         print(' 1. Lista de películas\n')
         print(' 2. Agregar películas\n')
         print(' 3. Buscar película')
         print(' 4. Salir del menú')
-        elegir_opcion = input('Ingresa el número de las opciones: ')
+        elegir_opcion = input('Ingresa el número de la opción que quieres ejecutar: ')
         return elegir_opcion
 
 

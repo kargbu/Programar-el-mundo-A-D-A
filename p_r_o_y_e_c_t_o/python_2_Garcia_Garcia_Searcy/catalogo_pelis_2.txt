@@ -1,5 +1,0 @@
-<pelicula.Pelicula object at 0x1002c35e0>
-<pelicula.Pelicula object at 0x102dff6a0>
-peliculas = [
-    
-]
