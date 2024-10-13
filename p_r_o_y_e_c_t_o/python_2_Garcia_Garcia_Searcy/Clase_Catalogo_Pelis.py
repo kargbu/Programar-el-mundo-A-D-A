@@ -1,5 +1,5 @@
 import os
-from pelicula import Pelicula
+from clase_peliculas import Pelicula
 
 class CatalogoPeliculas:
     def __init__(self, ruta_directorio):
