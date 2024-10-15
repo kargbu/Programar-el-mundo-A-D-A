@@ -41,6 +41,7 @@ class CatalogoPeliculas:
                     self.mostrar_archivos_txt()
                     self.elegir_catalogo()
                     self.ejecutar_menu_peliculas()
+                  
 
                 elif elegir_opcion == 3:
                     print('Escogiste eliminar un catálogo\n')
@@ -96,7 +97,7 @@ class CatalogoPeliculas:
                 genero      =   input('Género de la película:\n ')
                 pelicula    =   Pelicula(titulo, anio, genero, director)
                 self.peliculas.append(pelicula)
-                archivo.write(f'{titulo}, {anio}, {genero}, {director}\n')
+                archivo.write(f'("{titulo}", "{anio}", "{genero}", "{director}")' + '\n')
                 print('Película agregada con éxito.')
         except Exception as e:
             print(f'Error al agregar la película: {e}')
@@ -116,7 +117,7 @@ class CatalogoPeliculas:
                     genero      =   input('Género de la película:\n')
                     pelicula    =   Pelicula(titulo, anio, genero, director)
                     self.peliculas.append(pelicula)
-                    nuevo.write(str(titulo), {anio}, {genero}, {director} + '\n')
+                    nuevo.write(f'("{titulo}", "{anio}", "{genero}", "{director}")' + '\n')
                     continuar   =   input('¿Deseas añadir otra película? (S/N):\n ')
                     if continuar.lower() != 's':
                         break
@@ -142,6 +143,7 @@ class CatalogoPeliculas:
         archivos_catalogos      =   os.listdir(self.ruta_directorio)
         archivos_catalogos_txt  =   [archivo for archivo in archivos_catalogos if archivo.endswith('.txt')]
         elegir_archivo = input('Ingresa el número del catálogo que deseas abrir: ')
+
         if elegir_archivo.isdigit() and 1 <= int(elegir_archivo) <= len(archivos_catalogos_txt):
             self.nombre_catalogo = archivos_catalogos_txt[int(elegir_archivo) - 1].replace('.txt', '')
             print(f'Seleccionaste el catálogo: {self.nombre_catalogo}\n')
@@ -168,6 +170,7 @@ class CatalogoPeliculas:
                 for i, archivo in enumerate(archivos_catalogos_txt, 1):
                     print(f'{i}. {archivo}')
                 elegir_archivo = input('Ingresa el número del archivo que deseas eliminar: ')
+
                 if elegir_archivo.isdigit() and 1 <= int(elegir_archivo) <= len(archivos_catalogos_txt):
                     archivo_a_eliminar = archivos_catalogos_txt[int(elegir_archivo) - 1]
                     ruta_archivo = os.path.join(self.ruta_directorio, archivo_a_eliminar)
@@ -180,8 +183,9 @@ class CatalogoPeliculas:
 
 # Método para mostrar información
     def mostrar_info_pelicula(self):
-        print(f'Nombre de la película es {self.__titulo} y el género es {self.genero}.')
-        print(f'El director de {self.__titulo} es {self.director} y se estrenó en el año {self.__anio}\n')  # Imprime la información
+        for pelicula in self.peliculas:
+            print(f'Nombre de la película es {self.titulo} y el género es {self.genero}.')
+        print(f'El director de {self.titulo} es {self.director} y se estrenó en el año {self.anio}\n')  # Imprime la información
 
     def buscar_pelicula(self):
         ruta_archivo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.txt')
