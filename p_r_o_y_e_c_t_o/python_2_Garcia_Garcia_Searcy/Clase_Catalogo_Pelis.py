@@ -3,9 +3,9 @@ from clase_peliculas import Pelicula
 
 class CatalogoPeliculas:
     def __init__(self, ruta_directorio):
-        self.nombre_catalogo = ''
-        self.ruta_directorio = ruta_directorio
-        self.peliculas = []
+        self.nombre_catalogo    =   ''
+        self.ruta_directorio    =   ruta_directorio
+        self.peliculas          =   []
 
     def solicitar_nombre_catalogo(self):
         self.nombre_catalogo = input('Escribe el nombre del catálogo: ')
@@ -31,6 +31,7 @@ class CatalogoPeliculas:
                 print('Opción inválida, intenta de nuevo.')
             else:
                 elegir_opcion = int(elegir_opcion)
+
                 if elegir_opcion == 1:
                     print('Escogiste crear un catálogo\n')
                     self.solicitar_nombre_catalogo()
@@ -42,7 +43,6 @@ class CatalogoPeliculas:
                     self.elegir_catalogo()
                     self.ejecutar_menu_peliculas()
                   
-
                 elif elegir_opcion == 3:
                     print('Escogiste eliminar un catálogo\n')
                     mensaje = self.eliminar_catalogo()
@@ -70,6 +70,7 @@ class CatalogoPeliculas:
                 print('Opción inválida, intenta de nuevamente.')
             else:
                 elegir_opcion_pelicula = int(elegir_opcion_pelicula)
+
                 if elegir_opcion_pelicula == 1:
                     print('La siguiente es la lista de películas:\n')
                     self.listar_peliculas()
@@ -77,7 +78,7 @@ class CatalogoPeliculas:
                 elif elegir_opcion_pelicula == 2:
                     print('Agrega una película\n')
                     self.agregar_pelicula()
-                    self.mostrar_info_pelicula()
+               
 
                 elif elegir_opcion_pelicula == 3:
                     print('Buscar película\n')
@@ -99,6 +100,7 @@ class CatalogoPeliculas:
                 self.peliculas.append(pelicula)
                 archivo.write(f'("{titulo}", "{anio}", "{genero}", "{director}")' + '\n')
                 print('Película agregada con éxito.')
+                self.mostrar_info_pelicula(pelicula)
         except Exception as e:
             print(f'Error al agregar la película: {e}')
 
@@ -117,7 +119,7 @@ class CatalogoPeliculas:
                     genero      =   input('Género de la película:\n')
                     pelicula    =   Pelicula(titulo, anio, genero, director)
                     self.peliculas.append(pelicula)
-                    nuevo.write(f'("{titulo}", "{anio}", "{genero}", "{director}")' + '\n')
+                    nuevo.write(f'("{titulo}", "{anio}", "{genero}", "{director}")' + '\n'+ '\n')
                     continuar   =   input('¿Deseas añadir otra película? (S/N):\n ')
                     if continuar.lower() != 's':
                         break
@@ -167,6 +169,7 @@ class CatalogoPeliculas:
             archivos_catalogos_txt  =   [archivo for archivo in archivos_catalogos if archivo.endswith('.txt')]
             if archivos_catalogos_txt:
                 print('Los catalogós que puedes eliminar son:\n ')
+
                 for i, archivo in enumerate(archivos_catalogos_txt, 1):
                     print(f'{i}. {archivo}')
                 elegir_archivo = input('Ingresa el número del archivo que deseas eliminar: ')
@@ -182,18 +185,17 @@ class CatalogoPeliculas:
             print(f'Error al eliminar el catálogo en el directorio: {e}')
 
 # Método para mostrar información
-    def mostrar_info_pelicula(self):
-        for pelicula in self.peliculas:
-            print(f'Nombre de la película es {self.titulo} y el género es {self.genero}.')
-        print(f'El director de {self.titulo} es {self.director} y se estrenó en el año {self.anio}\n')  # Imprime la información
+    def mostrar_info_pelicula(self, pelicula):
+            print(f'Nombre de la película es {pelicula.titulo} y el género es {pelicula.genero}.\n')
+            print(f'El director de {pelicula.titulo} es {pelicula.director} y se estrenó en el año {pelicula.anio}\n')  # Imprime la información
 
     def buscar_pelicula(self):
         ruta_archivo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.txt')
         titulo_a_buscar = input('Ingresa el título de la película que deseas buscar: ')
         try:
             with open(ruta_archivo, 'r') as archivo:
-                peliculas  =  archivo.readlines()
-                encontrado =  False
+                peliculas    =  archivo.readlines()
+                encontrado   =  False
                 for pelicula in peliculas:
                     if titulo_a_buscar.lower() in pelicula.lower():
                         print(pelicula)
