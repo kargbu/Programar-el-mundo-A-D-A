@@ -82,7 +82,7 @@ class CatalogoPeliculas:
                     print('Buscar película\n')
                     self.buscar_pelicula()
 
-                elif elegir_opcion_pelicula ==4:
+                elif elegir_opcion_pelicula ==  4:
                     print('Saliendo del menú de películas...')
                     break
 
@@ -90,11 +90,11 @@ class CatalogoPeliculas:
         try:
             ruta_archivo = os.path.join(self.ruta_directorio, self.nombre_catalogo + '.txt')
             with open(ruta_archivo, 'a') as archivo:
-                titulo = input('Título de la película:\n ')
-                director = input('Director de la película:\n ')
-                anio = input('Año de la película:\n ')
-                genero = input('Género de la película:\n ')
-                pelicula = Pelicula(titulo, anio, genero, director)
+                titulo      =   input('Título de la película:\n ')
+                director    =   input('Director de la película:\n ')
+                anio        =   input('Año de la película:\n ')
+                genero      =   input('Género de la película:\n ')
+                pelicula    =   Pelicula(titulo, anio, genero, director)
                 self.peliculas.append(pelicula)
                 archivo.write(f'{titulo}, {anio}, {genero}, {director}\n')
                 print('Película agregada con éxito.')
@@ -107,17 +107,17 @@ class CatalogoPeliculas:
             with open(ruta_archivo, 'a') as nuevo:
                 
                 while True:
-                    preguntar = input('¿Quieres registrar una película en el nuevo catálogo? (S/N) ')
+                    preguntar   =     input('¿Quieres registrar una película en el nuevo catálogo? (S/N) ')
                     if preguntar.lower() != 's':
                         break
-                    titulo = input('Título de la pélicula:\n ')
-                    director = input('Director de la película:\n ')
-                    anio = input('Año de la película:\n ')
-                    genero = input('Género de la película:\n')
-                    pelicula = Pelicula(titulo, anio, genero, director)
+                    titulo      =   input('Título de la pélicula:\n ')
+                    director    =   input('Director de la película:\n ')
+                    anio        =   input('Año de la película:\n ')
+                    genero      =   input('Género de la película:\n')
+                    pelicula    =   Pelicula(titulo, anio, genero, director)
                     self.peliculas.append(pelicula)
                     nuevo.write(str(titulo), {anio}, {genero}, {director} + '\n')
-                    continuar = input('¿Deseas añadir otra película? (S/N):\n ')
+                    continuar   =   input('¿Deseas añadir otra película? (S/N):\n ')
                     if continuar.lower() != 's':
                         break
                 print('Catálogo creado con éxito')
@@ -127,8 +127,8 @@ class CatalogoPeliculas:
 
     def mostrar_archivos_txt(self):
         try:
-            archivos_catalogos = os.listdir(self.ruta_directorio)
-            archivos_catalogos_txt = [archivo for archivo in archivos_catalogos if archivo.endswith('.txt')]
+            archivos_catalogos      =   os.listdir(self.ruta_directorio)
+            archivos_catalogos_txt  =   [archivo for archivo in archivos_catalogos if archivo.endswith('.txt')]
             if archivos_catalogos_txt:
                 print('Los catálogos son:\n ')
                 for i, archivo in enumerate(archivos_catalogos_txt, 1):
@@ -139,8 +139,8 @@ class CatalogoPeliculas:
             print(f'Error al listar los catálogos: {e}')
     
     def elegir_catalogo(self):
-        archivos_catalogos = os.listdir(self.ruta_directorio)
-        archivos_catalogos_txt = [archivo for archivo in archivos_catalogos if archivo.endswith('.txt')]
+        archivos_catalogos      =   os.listdir(self.ruta_directorio)
+        archivos_catalogos_txt  =   [archivo for archivo in archivos_catalogos if archivo.endswith('.txt')]
         elegir_archivo = input('Ingresa el número del catálogo que deseas abrir: ')
         if elegir_archivo.isdigit() and 1 <= int(elegir_archivo) <= len(archivos_catalogos_txt):
             self.nombre_catalogo = archivos_catalogos_txt[int(elegir_archivo) - 1].replace('.txt', '')
@@ -161,8 +161,8 @@ class CatalogoPeliculas:
                         
     def eliminar_catalogo(self):
         try:
-            archivos_catalogos = os.listdir(self.ruta_directorio)
-            archivos_catalogos_txt = [archivo for archivo in archivos_catalogos if archivo.endswith('.txt')]
+            archivos_catalogos      =   os.listdir(self.ruta_directorio)
+            archivos_catalogos_txt  =   [archivo for archivo in archivos_catalogos if archivo.endswith('.txt')]
             if archivos_catalogos_txt:
                 print('Los catalogós que puedes eliminar son:\n ')
                 for i, archivo in enumerate(archivos_catalogos_txt, 1):
@@ -188,8 +188,8 @@ class CatalogoPeliculas:
         titulo_a_buscar = input('Ingresa el título de la película que deseas buscar: ')
         try:
             with open(ruta_archivo, 'r') as archivo:
-                peliculas = archivo.readlines()
-                encontrado = False
+                peliculas  =  archivo.readlines()
+                encontrado =  False
                 for pelicula in peliculas:
                     if titulo_a_buscar.lower() in pelicula.lower():
                         print(pelicula)
@@ -201,6 +201,6 @@ class CatalogoPeliculas:
 
 # Crear una instancia y ejecutar el menú
 ruta_directorio = '/Users/kgb/Desktop/ADA_TRABAJOS/ADA_TRABAJOS/p_r_o_y_e_c_t_o/python_2_Garcia_Garcia_Searcy/'
-catalogo = CatalogoPeliculas(ruta_directorio)
+catalogo        = CatalogoPeliculas(ruta_directorio)
 catalogo.ejecutar_menu_catalogo()
 catalogo.ejecutar_menu_peliculas()
