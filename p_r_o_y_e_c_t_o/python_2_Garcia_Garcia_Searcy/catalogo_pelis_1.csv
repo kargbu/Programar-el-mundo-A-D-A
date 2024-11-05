@@ -1,19 +1,22 @@
-peliculas = [
-    ('Inception', 2010, 'Ciencia Ficción', 'Christopher Nolan'),
 
-    ('The Matrix', 1999, 'Ciencia Ficción', 'Lana Wachowski y Lilly Wachowski'),
+Título, año, género, director
 
-    ('Interstellar', 2014, 'Ciencia Ficción', 'Christopher Nolan'),
+'Inception', 2010, 'Ciencia Ficción', 'Christopher Nolan'
 
-    ('The Godfather', 1972, 'Drama', 'Francis Ford Coppola'),
+'The Matrix', 1999, 'Ciencia Ficción', 'Lana Wachowski y Lilly Wachowski'
 
-    ('Pulp Fiction', 1994, 'Crimen', 'Quentin Tarantino'),
+'Interstellar', 2014, 'Ciencia Ficción', 'Christopher Nolan'
 
-    ('The Dark Knight', 2008, 'Acción', 'Christopher Nolan')
+'The Godfather', 1972, 'Drama', 'Francis Ford Coppola'
 
-    ('Matriz', 1999, 'Ciencia Ficción', 'Lana Wachowski')
+'Pulp Fiction', 1994, 'Crimen', 'Quentin Tarantino'
 
-    ('Una familia normal', 2003, 'Drama', 'Per Hanefjord') 
-]Inception, 2010, Ciencia Ficción, Christopher Nolan
-Inception, 2010, 2010, Christopher Nolan
-Pulp Fiction, 1994, Crimen, Quentin Tarantino
+'The Dark Knight', 2008, 'Acción', 'Christopher Nolan'
+
+'Matriz', 1999, 'Ciencia Ficción', 'Lana Wachowski'
+
+'Una familia normal', 2003, 'Drama', 'Per Hanefjord'
+
+'Inception', 2010, 'Ciencia Ficción', 'Christopher Nolan'
+
+'Pulp Fiction', 1994, 'Crimen', 'Quentin Tarantino'
